@@ -190,7 +190,6 @@ private[spark] class Client(
             .withName(driverPodName)
           // Reset resource to old before we start the watch, this is important for race conditions
           watcher.reset()
-          
           try {
             watch = podWithName.watch(watcher)
 
@@ -203,8 +202,7 @@ private[spark] class Client(
               break
             }
           } catch {
-            case NonFatal(e) => 
-              logWarning(s"Connection to Kubernetes failed. Exception: $e")
+            case NonFatal(e) => logWarning("Connection to Kubernetes failed.")
           }
         }
       }
